@@ -1,0 +1,9 @@
+﻿  Header.cpp
+C:\Users\ACER\source\repos\MyFS\MyFS\Header.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+C:\Users\ACER\source\repos\MyFS\MyFS\Header.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+  Volume.cpp
+C:\Users\ACER\source\repos\MyFS\MyFS\Header.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+  Generating Code...
+  MyFS.vcxproj -> C:\Users\ACER\source\repos\MyFS\Debug\MyFS.exe
