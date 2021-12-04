@@ -7,3 +7,6 @@
 #include <stdint.h>
 
 using namespace std;
+
+int showFormatMenu();
+void hashFunction(string& content, int n);

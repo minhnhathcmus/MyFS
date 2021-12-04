@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="EntryTable.cpp" />
+    <ClCompile Include="function.cpp" />
     <ClCompile Include="Header.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Volume.cpp" />

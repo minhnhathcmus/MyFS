@@ -2,6 +2,14 @@
 
 Header::Header()
 {
+	password = "";
+	entrySize = 0;
+	dataSize = 0;
+	volumeSize = sizeof(Header) + entrySize + dataSize;
+}
+Header::Header(string _password)
+{
+	password = _password;
 	entrySize = 0;
 	dataSize = 0;
 	volumeSize = sizeof(Header) + entrySize + dataSize;
@@ -9,6 +17,10 @@ Header::Header()
 Header::~Header()
 {
 
+}
+string Header::getPassword()
+{
+	return password;
 }
 unsigned int Header::getEntrySize()
 {
@@ -21,6 +33,10 @@ unsigned long long Header::getDataSize()
 unsigned long long Header::getVolumeSize()
 {
 	return volumeSize;
+}
+void Header::setPassword(string _password)
+{
+	password = _password;
 }
 void Header::setEntrySize(unsigned int _entrySize)
 {
