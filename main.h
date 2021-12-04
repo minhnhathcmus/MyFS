@@ -8,5 +8,7 @@
 
 using namespace std;
 
+int readBlock(void*& buffer, FILE*& f);
+int writeBlock(void* buffer, FILE*& f);
 int showFormatMenu();
 void hashFunction(string& content, int n);

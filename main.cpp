@@ -2,8 +2,8 @@
 
 int main()
 {
-	Volume volume;
+	/*Volume volume;
 	volume.create();
-	volume.format();
+	volume.format();*/
 	return 0;
 }

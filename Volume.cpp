@@ -31,7 +31,7 @@ int Volume::create()
 	path = volumePath;
 	header = Header();
 	entryTable = EntryTable();
-	if (fwrite(&header, sizeof(header), 1, f) != 1)
+	if (writeBlock(&header, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, tao volume that bai!" << endl;
 		fclose(f);
@@ -51,7 +51,7 @@ int Volume::fullFormat()
 	}
 	header = Header(header.getPassword());
 	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
-	if (fwrite(&header, sizeof(header), 1, f) != 1)
+	if (writeBlock(&header, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
@@ -72,7 +72,7 @@ int Volume::quickFormat()
 	}
 	header = temp_header;
 	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
-	if (fwrite(&header, sizeof(header), 1, f) != 1)
+	if (writeBlock(&header, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
