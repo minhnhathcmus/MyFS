@@ -2,9 +2,13 @@
 
 EntryTable::EntryTable()
 {
-	root = NULL;
+	
 }
 EntryTable::~EntryTable()
 {
 	
+}
+vector<EntryNode*> EntryTable::getEntryList()
+{
+	return entryList;
 }

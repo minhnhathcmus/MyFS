@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Volume.h"
 #define VOLUME_NAME "MyFS.Dat"
 
@@ -8,6 +9,14 @@ Volume::Volume()
 Volume::~Volume()
 {
 
+}
+string Volume::getPath()
+{
+	return path;
+}
+EntryTable Volume::getEntryTable()
+{
+	return entryTable;
 }
 int Volume::create()
 {
@@ -104,5 +113,52 @@ int Volume::format()
 		cout << "Loi khong xac dinh, khong the dinh dang.\n";
 		return 3; //Ma 3: loi khong xac dinh, khong the dinh dang.
 	}
+	}
+}
+int Volume::list(vector<EntryNode*> listOfEntryInRoot, EntryNode* parent, string folderName/*, int number_of_tab*/)
+{//Liet ke danh sach tap tin/thu muc trong 1 volume/thu muc, bien folderName chua ten volume/ten thu muc
+	system("cls");
+	cout << "Danh sach tap tin/thu muc trong " << getFileNameFromPath(folderName) << ":\n";
+	for (int i = 0; i < listOfEntryInRoot.size(); i++)
+	{
+		//printTab(number_of_tab);
+		cout << i + 1 << '.\t';
+		traverse(listOfEntryInRoot[i]/*, number_of_tab*/);
+	}
+	int option;
+	if (parent != NULL)
+	{
+		do
+		{
+			cout << "Nhap vao so tuong ung voi tap tin/thu muc de duyet tap tin/thu muc do\n";
+			cout << "0. Quay lai\n";
+			cout << "-1. Thoat liet ke\n";
+			cin >> option;
+		} while (!(option >= -1 && option <= listOfEntryInRoot.size()));
+		if (option == -1)
+			return 0;
+		else if (option == 0)
+			list(parent->childrenList, parent->parent, parent->item.getFileName()/*, number_of_tab - 1*/);			
+		else
+		{
+			EntryNode* child = listOfEntryInRoot[option - 1];
+			list(child->childrenList, child, child->item.getFileName()/*, number_of_tab + 1*/);
+		}
+	}
+	else
+	{
+		do
+		{
+			cout << "Nhap vao so tuong ung voi tap tin/thu muc de duyet tap tin/thu muc do\n";
+			cout << "-1. Thoat liet ke\n";
+			cin >> option;
+		} while (!(option == -1 || (1 <= option && option <= listOfEntryInRoot.size())));
+		if (option == -1)
+			return 0;
+		else
+		{
+			EntryNode* child = listOfEntryInRoot[option - 1];
+			list(child->childrenList, child, child->item.getFileName()/*, number_of_tab + 1*/);
+		}
 	}
 }

@@ -2,8 +2,8 @@
 
 Entry::Entry()
 {
-	date = 0;
-	time = 0;
+	date.day = date.month = date.year = 0;
+	time.hour = time.minute = time.second = 0;
 	dataSize = 0;
 	fileNameLength = 0;
 	passwordLength = 0;
@@ -15,11 +15,11 @@ Entry::~Entry()
 {
 
 }
-unsigned short Entry::getDate()
+Date Entry::getDate()
 {
 	return date;
 }
-unsigned short Entry::getTime()
+Time Entry::getTime()
 {
 	return time;
 }
@@ -47,11 +47,11 @@ string Entry::getPassword()
 {
 	return password;
 }
-void Entry::setDate(unsigned short _date)
+void Entry::setDate(Date _date)
 {
 	date = _date;
 }
-void Entry::setTime(unsigned short _time)
+void Entry::setTime(Time _time)
 {
 	time = _time;
 }
