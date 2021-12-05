@@ -44,10 +44,10 @@
     <ClCompile Include="Volume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntryTable.cpp">
+    <ClCompile Include="function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="function.cpp">
+    <ClCompile Include="EntryTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

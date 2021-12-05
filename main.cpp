@@ -2,8 +2,9 @@
 
 int main()
 {
-	/*Volume volume;
+	Volume volume;
 	volume.create();
-	volume.format();*/
+	//volume.format();
+	volume.list(volume.getEntryTable().getEntryList(), NULL, volume.getPath());
 	return 0;
 }

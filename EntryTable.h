@@ -1,12 +1,12 @@
 #pragma once
-#include "Entry.h"
+#include "main.h"
 
 class EntryTable
 {
 private:
-	Entry* root;
-	vector<Entry*> entryTable;
+	vector<EntryNode*> entryList; //Chua cac EntryNode cua cac Entry thuoc thu muc goc
 public:
 	EntryTable();
 	~EntryTable();
+	vector<EntryNode*> getEntryList();
 };
