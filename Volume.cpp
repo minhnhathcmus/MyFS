@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Volume.h"
-#define VOLUME_NAME "MyFS.Dat"
 
 Volume::Volume()
 {
@@ -40,7 +39,10 @@ int Volume::create()
 	path = volumePath;
 	header = Header();
 	entryTable = EntryTable();
-	if (writeBlock(&header, f) != 1)
+	int writen_block_count = sizeof(header) / SECTOR_SIZE;
+	if (sizeof(header) % SECTOR_SIZE != 0)
+		writen_block_count++;
+	if (writeBlock(&header, writen_block_count, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, tao volume that bai!" << endl;
 		fclose(f);
@@ -60,7 +62,10 @@ int Volume::fullFormat()
 	}
 	header = Header(header.getPassword());
 	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
-	if (writeBlock(&header, f) != 1)
+	int writen_block_count = sizeof(header) / SECTOR_SIZE;
+	if (sizeof(header) % SECTOR_SIZE != 0)
+		writen_block_count++;
+	if (writeBlock(&header, writen_block_count, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
@@ -81,7 +86,10 @@ int Volume::quickFormat()
 	}
 	header = temp_header;
 	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
-	if (writeBlock(&header, f) != 1)
+	int writen_block_count = sizeof(header) / SECTOR_SIZE;
+	if (sizeof(header) % SECTOR_SIZE != 0)
+		writen_block_count++;
+	if (writeBlock(&header, writen_block_count, f) != 1)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
@@ -115,10 +123,10 @@ int Volume::format()
 	}
 	}
 }
-int Volume::list(vector<EntryNode*> listOfEntryInRoot, EntryNode* parent, string folderName/*, int number_of_tab*/)
-{//Liet ke danh sach tap tin/thu muc trong 1 volume/thu muc, bien folderName chua ten volume/ten thu muc
+int Volume::list(vector<EntryNode*> listOfEntryInRoot, EntryNode* parent, string folderPath/*, int number_of_tab*/)
+{//Liet ke danh sach tap tin/thu muc trong 1 volume/thu muc, bien folderPath chua duong dan den volume/thu muc
 	system("cls");
-	cout << "Danh sach tap tin/thu muc trong " << getFileNameFromPath(folderName) << ":\n";
+	cout << "Danh sach tap tin/thu muc trong " << getFileNameFromPath(folderPath) << ":\n";
 	for (int i = 0; i < listOfEntryInRoot.size(); i++)
 	{
 		//printTab(number_of_tab);

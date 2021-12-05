@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 #include "Entry.h"
+#define VOLUME_NAME "MyFS.Dat"
+#define SECTOR_SIZE 512
+
 
 using namespace std;
 
@@ -17,7 +20,7 @@ struct EntryNode
 };
 
 int readBlock(void*& buffer, FILE*& f);
-int writeBlock(void* buffer, FILE*& f);
+int writeBlock(void* buffer, int writen_block_count, FILE*& f);
 int showFormatMenu();
 void hashFunction(string& content, int n);
 string getFileNameFromPath(string path);

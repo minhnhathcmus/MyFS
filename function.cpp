@@ -6,11 +6,14 @@ int readBlock(void*& buffer, FILE*& f)
 		return 1; //Ma 1: doc du lieu thanh cong
 	return 0; //Ma 0: doc du lieu that bai
 }
-int writeBlock(void* buffer, FILE*& f)
+int writeBlock(void* buffer, int writen_block_count, FILE*& f)
 {
-	if (fwrite(buffer, 512, 1, f) == 1)
-		return 1; //Ma 1: ghi du lieu thanh cong
-	return 0; //Ma 0: ghi du lieu that bai
+	for (int i = 0; i < writen_block_count; i++)
+	{
+		if (fwrite(buffer, SECTOR_SIZE, 1, f) != 1) //Moi lan ghi 512 byte giong nhu truy xuat tung cum 512 byte tren sector
+			return 0; //Ma 0: ghi du lieu that bai
+	}	
+	return 1; //Ma 1: ghi du lieu thanh cong
 }
 int showFormatMenu() //Ham xuat menu khi chon chuc nang dinh dang volume
 {
