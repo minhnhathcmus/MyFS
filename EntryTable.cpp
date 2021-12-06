@@ -8,7 +8,11 @@ EntryTable::~EntryTable()
 {
 	
 }
-vector<EntryNode*> EntryTable::getEntryList()
+vector<Entry> EntryTable::getEntryList()
 {
 	return entryList;
+}
+void EntryTable::setEntryList(Entry entry)
+{
+	entryList.push_back(entry);
 }

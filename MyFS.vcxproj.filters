@@ -27,9 +27,6 @@
     <ClInclude Include="Volume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntryTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="function.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EntryTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

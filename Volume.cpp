@@ -3,7 +3,9 @@
 
 Volume::Volume()
 {
-	
+	path = "";
+	header = Header();
+	entryTable;
 }
 Volume::~Volume()
 {
@@ -13,7 +15,11 @@ string Volume::getPath()
 {
 	return path;
 }
-EntryTable Volume::getEntryTable()
+Header Volume::getHeader()
+{
+	return header;
+}
+vector<Entry> Volume::getEntryTable()
 {
 	return entryTable;
 }
@@ -38,11 +44,18 @@ int Volume::create()
 	}
 	path = volumePath;
 	header = Header();
-	entryTable = EntryTable();
+	entryTable;
 	int writen_block_count = sizeof(header) / SECTOR_SIZE;
-	if (sizeof(header) % SECTOR_SIZE != 0)
-		writen_block_count++;
-	if (writeBlock(&header, writen_block_count, f) != 1)
+	for (int i = 0; i < writen_block_count; i++)
+	{
+		if (writeBlock(&header, SECTOR_SIZE, f) != SECTOR_SIZE)
+		{
+			cout << "Khong the ghi du lieu thanh cong, tao volume that bai!" << endl;
+			fclose(f);
+			return 3; //Ma loi 3: khong the ghi du lieu thanh cong
+		}
+	}
+	if (writeBlock(&header, sizeof(header) % SECTOR_SIZE, f) != sizeof(header) % SECTOR_SIZE)
 	{
 		cout << "Khong the ghi du lieu thanh cong, tao volume that bai!" << endl;
 		fclose(f);
@@ -61,11 +74,18 @@ int Volume::fullFormat()
 		return 1; //Ma loi 1: khong the xoa volume cu de tao volume moi
 	}
 	header = Header(header.getPassword());
-	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
+	//entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
 	int writen_block_count = sizeof(header) / SECTOR_SIZE;
-	if (sizeof(header) % SECTOR_SIZE != 0)
-		writen_block_count++;
-	if (writeBlock(&header, writen_block_count, f) != 1)
+	for (int i = 0; i < writen_block_count; i++)
+	{
+		if (writeBlock(&header, SECTOR_SIZE, f) != SECTOR_SIZE)
+		{
+			cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
+			fclose(f);
+			return 3; //Ma loi 3: khong the ghi du lieu thanh cong
+		}
+	}
+	if (writeBlock(&header, sizeof(header) % SECTOR_SIZE, f) != sizeof(header) % SECTOR_SIZE)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
@@ -85,11 +105,18 @@ int Volume::quickFormat()
 		return 1; //Ma loi 1: khong the xoa volume cu de tao volume moi
 	}
 	header = temp_header;
-	entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
+	//entryTable = EntryTable(); //Cho nay can duyet cay de xoa entry table
 	int writen_block_count = sizeof(header) / SECTOR_SIZE;
-	if (sizeof(header) % SECTOR_SIZE != 0)
-		writen_block_count++;
-	if (writeBlock(&header, writen_block_count, f) != 1)
+	for (int i = 0; i < writen_block_count; i++)
+	{
+		if (writeBlock(&header, SECTOR_SIZE, f) != SECTOR_SIZE)
+		{
+			cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
+			fclose(f);
+			return 3; //Ma loi 3: khong the ghi du lieu thanh cong
+		}
+	}
+	if (writeBlock(&header, sizeof(header) % SECTOR_SIZE, f) != sizeof(header) % SECTOR_SIZE)
 	{
 		cout << "Khong the ghi du lieu thanh cong, dinh dang volume that bai!" << endl;
 		fclose(f);
@@ -123,50 +150,88 @@ int Volume::format()
 	}
 	}
 }
-int Volume::list(vector<EntryNode*> listOfEntryInRoot, EntryNode* parent, string folderPath/*, int number_of_tab*/)
-{//Liet ke danh sach tap tin/thu muc trong 1 volume/thu muc, bien folderPath chua duong dan den volume/thu muc
+void Volume::list(vector<Entry> listOfEntryInRoot)
+{//Liet ke danh sach tap tin/thu muc trong volume
 	system("cls");
-	cout << "Danh sach tap tin/thu muc trong " << getFileNameFromPath(folderPath) << ":\n";
-	for (int i = 0; i < listOfEntryInRoot.size(); i++)
+	cout << "Danh sach tap tin trong " << VOLUME_NAME << ":\n";
+	for (int i = 0; i < (int)listOfEntryInRoot.size(); i++)
 	{
-		//printTab(number_of_tab);
 		cout << i + 1 << '.\t';
-		traverse(listOfEntryInRoot[i]/*, number_of_tab*/);
+		traverse(listOfEntryInRoot[i]);
 	}
-	int option;
-	if (parent != NULL)
+}
+int Volume::importFile()
+{
+	system("cls");
+	string sourceFilePath;
+	cout << "Nhap duong dan den tap tin muon chep vao " << VOLUME_NAME << ": ";
+	//cin.ignore();
+	getline(cin, sourceFilePath);
+	FILE* fi = fopen(sourceFilePath.c_str(), "rb");
+	if (fi == NULL)
 	{
-		do
-		{
-			cout << "Nhap vao so tuong ung voi tap tin/thu muc de duyet tap tin/thu muc do\n";
-			cout << "0. Quay lai\n";
-			cout << "-1. Thoat liet ke\n";
-			cin >> option;
-		} while (!(option >= -1 && option <= listOfEntryInRoot.size()));
-		if (option == -1)
-			return 0;
-		else if (option == 0)
-			list(parent->childrenList, parent->parent, parent->item.getFileName()/*, number_of_tab - 1*/);			
-		else
-		{
-			EntryNode* child = listOfEntryInRoot[option - 1];
-			list(child->childrenList, child, child->item.getFileName()/*, number_of_tab + 1*/);
-		}
+		cout << "Duong dan khong ton tai hoac co loi khong xac dinh, khong the chep tap tin!\n";
+		return 1; //Ma loi 1: duong dan khong ton tai hoac co loi khong xac dinh
 	}
 	else
 	{
-		do
+		string fileName = sourceFilePath.substr(sourceFilePath.find_last_of('\\') + 1); //Lay ten tap tin can chep
+		string destinationFilePath = getPath() + fileName;
+
+		for (int i = 0; i < entryTable.size(); i++)
 		{
-			cout << "Nhap vao so tuong ung voi tap tin/thu muc de duyet tap tin/thu muc do\n";
-			cout << "-1. Thoat liet ke\n";
-			cin >> option;
-		} while (!(option == -1 || (1 <= option && option <= listOfEntryInRoot.size())));
-		if (option == -1)
-			return 0;
+			if (entryTable[i].getFileName() == destinationFilePath)
+			{
+				cout << "Tap tin da ton tai trong thu muc nay, khong the chep tap tin!";
+				return 2; //Ma loi 2: tap tin da ton tai trong thu muc
+			}
+		}
+
+		FILE* fo = fopen(getPath().c_str(), "ab");
+		if (fo == NULL)
+		{
+			cout << "Khong the truy xuat volume " << VOLUME_NAME << " de chep tap tin!\n";
+			return 3; //Ma loi 3: khong the mo volume de chep tap tin
+		}
 		else
 		{
-			EntryNode* child = listOfEntryInRoot[option - 1];
-			list(child->childrenList, child, child->item.getFileName()/*, number_of_tab + 1*/);
+			unsigned int fileSize;
+			fseek(fi, 0, SEEK_END);
+			fileSize = ftell(fi); //Lay duoc kich thuoc tap tin can chep
+			fseek(fi, 0, SEEK_SET);
+			int writen_block_count = fileSize / SECTOR_SIZE;
+			if (fileSize % SECTOR_SIZE != 0)
+				writen_block_count++;
+
+			int block_count;
+			char* buf = new char[SECTOR_SIZE];
+			for (int i = 0; i < writen_block_count; i++)
+			{
+				block_count = readBlock(buf, fi);
+				writeBlock(buf, block_count, fo);
+			}
+			delete[]buf;
+			fclose(fi);
+
+			Entry newEntry(getCurrentDate(), getCurrentTime(), fileSize, 
+				(unsigned short)destinationFilePath.length(),(unsigned short)0, header.getVolumeSize(),
+				destinationFilePath, "");
+			entryTable.push_back(newEntry);
+
+			header.setEntrySize(header.getEntrySize() + sizeof(newEntry));
+			header.setDataSize(header.getDataSize() + fileSize);
+			header.setVolumeSize(header.getVolumeSize() + sizeof(newEntry) + fileSize);
+
+			fseek(fo, 0, SEEK_SET);
+			writen_block_count = sizeof(header) / SECTOR_SIZE;
+			for (int i = 0; i < writen_block_count; i++)
+				writeBlock(&header, SECTOR_SIZE, fo);
+			writeBlock(&header, sizeof(header) % SECTOR_SIZE, fo);
+
+			writeEntryTable(entryTable, fo);
+			cout << "Chep tap tin vao volume " << VOLUME_NAME << " thanh cong.\n";
+			fclose(fo);
+			return 0;
 		}
 	}
 }

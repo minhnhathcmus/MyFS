@@ -1,24 +1,9 @@
-﻿  Entry.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\Entry.cpp(5,36): warning C4244: '=': conversion from 'unsigned short' to 'unsigned char', possible loss of data
-  EntryTable.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\EntryTable.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\EntryTable.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-  Header.cpp
-  Volume.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\EntryTable.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+﻿  Volume.cpp
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(130,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(145,37): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(163,53): warning C4018: '<=': signed/unsigned mismatch
-  function.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\function.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\function.cpp(33,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ACER\source\repos\MyFS\MyFS\function.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(181,21): warning C4018: '<': signed/unsigned mismatch
   main.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\EntryTable.h(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 C:\Users\ACER\source\repos\MyFS\MyFS\main.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
   Generating Code...
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(172): warning C4715: 'Volume::list': not all control paths return a value
   MyFS.vcxproj -> C:\Users\ACER\source\repos\MyFS\Debug\MyFS.exe
