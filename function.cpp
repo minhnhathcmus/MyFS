@@ -79,8 +79,12 @@ void traverse(EntryNode* node/*, int number_of_tab*/)
 
 void login() {
 	Volume volume;
-	volume.create();
+	volume.create(); // Neu volume co san thi doc volume do
 	Header header = volume.getHeader();
+	string currPass = header.getPassword();
+	string pass;
+	
+
 	string volPath = volume.getPath();
 	FILE* f = fopen(volPath.c_str(), "wb");
 
@@ -88,7 +92,14 @@ void login() {
 		createPassword(f);
 	}
 	else {
-		changePassword(f, header);
+		cout << "Nhap mat khau";
+		cin >> pass;
+		if (pass == currPass) {
+			// Dang nhap thanh cong
+
+			// Option doi mat khau
+			changePassword(f, header);
+		}
 	}
 	fclose(f);
 }
