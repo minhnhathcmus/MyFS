@@ -5,14 +5,14 @@ Header::Header()
 	password = "";
 	entrySize = 0;
 	dataSize = 0;
-	volumeSize = sizeof(Header) + entrySize + dataSize;
+	volumeSize = (unsigned long long)sizeof(Header) + (unsigned long long)entrySize + dataSize;
 }
 Header::Header(string _password)
 {
 	password = _password;
 	entrySize = 0;
 	dataSize = 0;
-	volumeSize = sizeof(Header) + entrySize + dataSize;
+	volumeSize = (unsigned long long)sizeof(Header) + (unsigned long long)entrySize + dataSize;
 }
 Header::~Header()
 {
