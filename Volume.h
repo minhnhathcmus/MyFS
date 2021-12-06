@@ -1,6 +1,5 @@
 #pragma once
 #include "Header.h"
-#include "EntryTable.h"
 #include "main.h"
 
 class Volume
@@ -8,16 +7,19 @@ class Volume
 private:
 	string path;
 	Header header;
-	EntryTable entryTable;
+	vector<Entry> entryTable;
 public:
 	Volume();
 	~Volume();
 	string getPath();
-	EntryTable getEntryTable();
 	Header getHeader();
+	vector<Entry> getEntryTable();
 	int create();
 	int fullFormat();
 	int quickFormat();
 	int format();
-	int list(vector<EntryNode*> listOfEntryInRoot, EntryNode* parent, string folderName/*, int number_of_tab*/);
+	void list(vector<Entry> listOfEntryInRoot);
+	int importFile();
+	void Volume::createPassword(FILE*& f);
+	void Volume::changePassword(FILE*& f, Header& header);
 };
