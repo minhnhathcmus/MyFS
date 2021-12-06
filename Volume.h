@@ -20,6 +20,6 @@ public:
 	int format();
 	void list(vector<Entry> listOfEntryInRoot);
 	int importFile();
-	void createPassword(FILE*& f, Header& header);
-	void changePassword(FILE*& f, Header& header);
+	int createPassword();
+	int changePassword();
 };

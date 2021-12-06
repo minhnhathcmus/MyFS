@@ -25,13 +25,13 @@ int main()
 		}
 		case 3:
 		{
-			// Them ham
+			volume.createPassword();
 			system("pause");
 			break;
 		}
 		case 4:
 		{
-			// Them ham
+			volume.changePassword();
 			system("pause");
 			break;
 		}
