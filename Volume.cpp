@@ -17,6 +17,11 @@ EntryTable Volume::getEntryTable()
 {
 	return entryTable;
 }
+Header Volume::getHeader() 
+{
+	return header;
+}
+
 int Volume::create()
 {
 	string inputPath;

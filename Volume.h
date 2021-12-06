@@ -14,6 +14,7 @@ public:
 	~Volume();
 	string getPath();
 	EntryTable getEntryTable();
+	Header getHeader();
 	int create();
 	int fullFormat();
 	int quickFormat();

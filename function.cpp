@@ -1,4 +1,5 @@
 #include "main.h"
+#include "Volume.h"
 
 int readBlock(void*& buffer, FILE*& f)
 {
@@ -74,4 +75,73 @@ void traverse(EntryNode* node/*, int number_of_tab*/)
 	//	cout << i + 1 << '.\t';
 	//	traverse(node->childrenList[i], number_of_tab + 1);
 	//}
+}
+
+void login() {
+	Volume volume;
+	volume.create();
+	Header header = volume.getHeader();
+	string volPath = volume.getPath();
+	FILE* f = fopen(volPath.c_str(), "wb");
+
+	if (header.getPassword() == "") {
+		createPassword(f);
+	}
+	else {
+		changePassword(f, header);
+	}
+	fclose(f);
+}
+
+void launch() {
+	do {
+		int choice;
+		cout << "1. Truy cap volume." << endl;
+		cout << "0. Thoat chuong trinh." << endl;
+		cin >> choice;
+		if (choice == 1) {
+			login();
+			return;
+		}
+		else if (choice == 0)
+			return;
+
+	} while (1);
+}
+
+void createPassword(FILE* f) {
+	string password;
+	cout << "Tao mat khau: ";
+	cin >> password;
+
+	hashFunction(password, 3);
+
+	fseek(f, 0, SEEK_SET);
+	fwrite(0, sizeof(password), 1, f);
+}
+
+void changePassword(FILE* f, Header header) {
+	string password;
+	cout << "Dat mat khau moi: ";
+	cin >> password;
+
+	hash(password, 3);
+	header.setPassword(3); // Tao header moi roi chen vao
+
+	if (f == NULL)
+	{
+		cout << "Khong the doi mat khau!\n";
+		return;
+	}
+
+	int writen_block_count = sizeof(header) / SECTOR_SIZE;
+	if (sizeof(header) % SECTOR_SIZE != 0)
+		writen_block_count++;
+	if (writeBlock(&header, writen_block_count, f) != 1)
+	{
+		cout << "Khong the ghi du lieu thanh cong, doi mat khau that bai!" << endl;
+		fclose(f);
+		return;
+	}
+	cout << "Doi mat khau thanh cong." << endl;
 }

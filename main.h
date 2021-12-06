@@ -16,7 +16,7 @@ struct EntryNode
 	Entry item; //Chua entry cua node hien tai
 	EntryNode* parent;
 	vector<EntryNode*> childrenList; //Chua danh sach cac entry quan ly cac tap tin/thu muc con
-									//thuoc node neu node nay la thu muc, chua danh sach rong neu node la tap tin
+									//thuoc node neu node nay la thu muc, chua danh sach rong neu node la tap tin	
 };
 
 int readBlock(void*& buffer, FILE*& f);
@@ -27,3 +27,6 @@ string getFileNameFromPath(string path);
 unsigned long long calculateDataSize(EntryNode* node);
 void printTab(int number_of_tab);
 void traverse(EntryNode* node/*, int number_of_tab*/);
+void launch();
+void createPassword(FILE* f);
+void changePassword(FILE* f, Header header);
