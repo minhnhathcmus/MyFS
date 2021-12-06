@@ -2,10 +2,53 @@
 
 int main()
 {
-	//launch();
 	Volume volume;
-	volume.create();
-	//volume.format();
-	volume.list(volume.getEntryTable().getEntryList(), NULL, volume.getPath());
+	int option;
+	do
+	{
+		option = showMainMenu();
+		switch (option)
+		{
+		case 0:
+			break;
+		case 1:
+		{
+			volume.create();
+			system("pause");
+			break;
+		}
+		case 2:
+		{
+			volume.format();
+			system("pause");
+			break;
+		}
+		case 3:
+		{
+			// Them ham
+			system("pause");
+			break;
+		}
+		case 4:
+		{
+			// Them ham
+			system("pause");
+			break;
+		}
+		case 5:
+		{
+			volume.list(volume.getEntryTable());
+			system("pause");
+			break;
+		}
+		default:
+		{
+			cout << "Loi khong xac dinh!\n";
+			system("pause");
+			break;
+		}
+		}
+	} while (option != 0);
+	cout << "Da thoat chuong trinh.";
 	return 0;
 }

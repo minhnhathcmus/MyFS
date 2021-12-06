@@ -24,18 +24,20 @@ private:
 	unsigned int dataSize;
 	unsigned short fileNameLength;
 	unsigned short passwordLength;
-	unsigned int offsetOfData; //Vi tri cua du lieu tinh tu dau volume
+	unsigned long long offsetOfData; //Vi tri cua du lieu tinh tu dau volume
 	string fileName;
 	string password;
 public:
 	Entry();
+	Entry(Date _date, Time _time, unsigned int _dataSize, unsigned short _fileNameLength, 
+		unsigned short _passwordLength, unsigned long long _offsetOfData, string _fileName, string _password);
 	~Entry();
 	Date getDate();
 	Time getTime();
 	unsigned int getDataSize();
 	unsigned short getFileNameLength();
 	unsigned short getPasswordLength();
-	unsigned int getOffsetOfData();
+	unsigned long long getOffsetOfData();
 	string getFileName();
 	string getPassword();
 	void setDate(Date _date);

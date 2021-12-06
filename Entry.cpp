@@ -11,6 +11,18 @@ Entry::Entry()
 	fileName = "";
 	password = "";
 }
+Entry::Entry(Date _date, Time _time, unsigned int _dataSize, unsigned short _fileNameLength,
+	unsigned short _passwordLength, unsigned long long _offsetOfData, string _fileName, string _password)
+{
+	date = _date;
+	time = _time;
+	dataSize = _dataSize;
+	fileNameLength = _fileNameLength;
+	passwordLength = _passwordLength;
+	offsetOfData = _offsetOfData;
+	fileName = _fileName;
+	password = _password;
+}
 Entry::~Entry()
 {
 
@@ -35,7 +47,7 @@ unsigned short Entry::getPasswordLength()
 {
 	return passwordLength;
 }
-unsigned int Entry::getOffsetOfData()
+unsigned long long Entry::getOffsetOfData()
 {
 	return offsetOfData;
 }

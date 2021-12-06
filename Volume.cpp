@@ -44,8 +44,11 @@ int Volume::create()
 		cout << "Duong dan khong ton tai hoac co loi khong xac dinh, khong the tao volume!\n";
 		return 2; //Ma loi 2: khong the tao volume
 	}
+	string password;
+	createPassword(f, header);
+
 	path = volumePath;
-	header = Header();
+	header = Header(password);
 	entryTable;
 	int writen_block_count = sizeof(header) / SECTOR_SIZE;
 	for (int i = 0; i < writen_block_count; i++)
@@ -239,16 +242,17 @@ int Volume::importFile()
 		}
 	}
 }
-void Volume::createPassword(FILE*& f) {
+void Volume::createPassword(FILE*& f, Header& header) {
 	string password;
 	cout << "Tao mat khau: ";
 	getline(cin, password);
 	cin.ignore();
-
 	hashFunction(password, 3);
+	header.setPassword(password);
+	/*string buffer[] = { password };
 
 	fseek(f, 0, SEEK_SET);
-	fwrite(0, sizeof(password), 1, f);
+	fwrite(buffer, sizeof(password), sizeof(buffer), f);*/
 }
 
 void Volume::changePassword(FILE*& f, Header& header) {

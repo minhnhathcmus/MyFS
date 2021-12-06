@@ -75,48 +75,32 @@ void writeEntryTable(vector<Entry> entryList, FILE*& f)
 		writeBlock(&entryList[i], sizeof(entryList[i]) % SECTOR_SIZE, f);
 	}
 }
-void login() {
-	Volume volume;
-	volume.create(); // Neu volume co san thi doc volume do
-	Header header = volume.getHeader();
-	string currPass = header.getPassword();
-	string pass;
-
-
-	string volPath = volume.getPath();
-	FILE* f = fopen(volPath.c_str(), "wb");
-
-	if (header.getPassword() == "") {
-		createPassword(f);
-	}
-	else {
-		cout << "Nhap mat khau";
-		cin >> pass;
-		if (pass == currPass) {
-			// Dang nhap thanh cong
-
-			// Option doi mat khau
-			changePassword(f, header);
-		}
-	}
-	fclose(f);
-}
-
-void launch() {
-	do {
-		int choice;
-		cout << "1. Truy cap volume." << endl;
-		cout << "0. Thoat chuong trinh." << endl;
-		cin >> choice;
-		if (choice == 1) {
-			login();
-			return;
-		}
-		else if (choice == 0)
-			return;
-
-	} while (1);
-}
+//void login() {
+//	Volume volume;
+//	volume.create(); // Neu volume co san thi doc volume do
+//	Header header = volume.getHeader();
+//	string currPass = header.getPassword();
+//	string pass;
+//
+//
+//	string volPath = volume.getPath();
+//	FILE* f = fopen(volPath.c_str(), "wb");
+//
+//	if (header.getPassword() == "") {
+//		volume.createPassword(f);
+//	}
+//	else {
+//		cout << "Nhap mat khau";
+//		cin >> pass;
+//		if (pass == currPass) {
+//			// Dang nhap thanh cong
+//
+//			// Option doi mat khau
+//			volume.changePassword(f, header);
+//		}
+//	}
+//	fclose(f);
+//}
 
 
 int showMainMenu()
