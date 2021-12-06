@@ -44,8 +44,11 @@ int Volume::create()
 		cout << "Duong dan khong ton tai hoac co loi khong xac dinh, khong the tao volume!\n";
 		return 2; //Ma loi 2: khong the tao volume
 	}
+	string password;
+	createPassword(f, header);
+
 	path = volumePath;
-	header = Header();
+	header = Header(password);
 	entryTable;
 	int writen_block_count = sizeof(header) / SECTOR_SIZE;
 	for (int i = 0; i < writen_block_count; i++)
@@ -238,4 +241,43 @@ int Volume::importFile()
 			return 0;
 		}
 	}
+}
+void Volume::createPassword(FILE*& f, Header& header) {
+	string password;
+	cout << "Tao mat khau: ";
+	getline(cin, password);
+	cin.ignore();
+	hashFunction(password, 3);
+	header.setPassword(password);
+	/*string buffer[] = { password };
+
+	fseek(f, 0, SEEK_SET);
+	fwrite(buffer, sizeof(password), sizeof(buffer), f);*/
+}
+
+void Volume::changePassword(FILE*& f, Header& header) {
+	string password;
+	cout << "Dat mat khau moi: ";
+	getline(cin, password);
+	cin.ignore();
+
+	hashFunction(password, 3);
+	header.setPassword(password); // Tao header moi roi chen vao
+
+	if (f == NULL)
+	{
+		cout << "Khong the doi mat khau!\n";
+		return;
+	}
+
+	int writen_block_count = sizeof(header) / SECTOR_SIZE;
+	if (sizeof(header) % SECTOR_SIZE != 0)
+		writen_block_count++;
+	if (writeBlock(&header, writen_block_count, f) != 1)
+	{
+		cout << "Khong the ghi du lieu thanh cong, doi mat khau that bai!" << endl;
+		fclose(f);
+		return;
+	}
+	cout << "Doi mat khau thanh cong." << endl;
 }

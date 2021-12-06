@@ -21,7 +21,4 @@ string getFileNameFromPath(string path);
 void traverse(Entry entry);
 Date getCurrentDate();
 Time getCurrentTime();
-void launch();
-void createPassword(FILE* f);
-void changePassword(FILE* f, Header header);
 void writeEntryTable(vector<Entry> entryList, FILE*& f);

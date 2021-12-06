@@ -25,13 +25,13 @@ int main()
 		}
 		case 3:
 		{
-			//Them method o day
+			// Them ham
 			system("pause");
 			break;
 		}
 		case 4:
 		{
-			//Them method o day
+			// Them ham
 			system("pause");
 			break;
 		}
