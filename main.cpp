@@ -1,15 +1,3 @@
-<<<<<<< Updated upstream
-#include "Volume.h"
-
-int main()
-{
-	Volume volume;
-	volume.create();
-	//volume.format();
-	volume.list(volume.getEntryTable());
-	volume.importFile();
-	return 0;
-=======
 #include "Volume.h"
 
 int main()
@@ -26,50 +14,41 @@ int main()
 		case 1:
 		{
 			volume.create();
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		case 2:
 		{
 			volume.format();
-			cin.ignore();
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		case 3:
 		{
 			//Them method o day
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		case 4:
 		{
 			//Them method o day
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		case 5:
 		{
 			volume.list(volume.getEntryTable());
-			cin.ignore();
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		default:
 		{
 			cout << "Loi khong xac dinh!\n";
-			cout << "\nNhan phim bat ky de tiep tuc";
-			getchar();
+			system("pause");
 			break;
 		}
 		}
 	} while (option != 0);
 	cout << "Da thoat chuong trinh.";
 	return 0;
->>>>>>> Stashed changes
 }

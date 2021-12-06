@@ -1,5 +1,6 @@
 #include "main.h"
 #include <ctime>
+#include "Volume.h"
 
 int readBlock(void* buffer, FILE*& f)
 {
@@ -73,8 +74,6 @@ void writeEntryTable(vector<Entry> entryList, FILE*& f)
 			writeBlock(&entryList[i], SECTOR_SIZE, f);
 		writeBlock(&entryList[i], sizeof(entryList[i]) % SECTOR_SIZE, f);
 	}
-<<<<<<< Updated upstream
-=======
 }
 void login() {
 	Volume volume;
@@ -171,5 +170,4 @@ int showMainMenu()
 		cin >> option;
 	} while (!(0 <= option && option <= 5));
 	return option;
->>>>>>> Stashed changes
 }

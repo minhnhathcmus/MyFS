@@ -1,13 +1,5 @@
 ﻿  Volume.cpp
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-<<<<<<< Updated upstream
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(181,21): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\main.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-  Generating Code...
-=======
 C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(184,21): warning C4018: '<': signed/unsigned mismatch
->>>>>>> Stashed changes
   MyFS.vcxproj -> C:\Users\ACER\source\repos\MyFS\Debug\MyFS.exe
