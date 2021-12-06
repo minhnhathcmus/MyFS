@@ -1,5 +1,2 @@
-﻿  Volume.cpp
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(2,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-C:\Users\ACER\source\repos\MyFS\MyFS\Volume.cpp(184,21): warning C4018: '<': signed/unsigned mismatch
+﻿Header.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Header.obj' or at 'C:\Users\ACER\source\repos\MyFS\Debug\vc142.pdb'; linking object as if no debug info
   MyFS.vcxproj -> C:\Users\ACER\source\repos\MyFS\Debug\MyFS.exe
